@@ -31,6 +31,8 @@ class BookAPITestCase(APITestCase):
         url = reverse('book-detail', kwargs={'pk': self.book.id})
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertIn('title', response.data)
+        self.assertEqual(response.data['title'], 'Test Book')
 
     def test_create_book_authenticated(self):
         self.client.login(username="testuser", password="password123")
