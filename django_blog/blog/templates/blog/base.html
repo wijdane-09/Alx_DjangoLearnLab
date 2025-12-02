@@ -14,15 +14,6 @@
     <header>
         <h1>My Django Blog</h1>
         <hr>
-        <!-- Navbar Authentication -->
-        <nav>
-            <a href="{% url 'home' %}">Home</a> |
-            <a href="{% url 'login' %}">Login</a> |
-            <a href="{% url 'register' %}">Register</a> |
-            <a href="{% url 'profile' %}">Profile</a> |
-            <a href="{% url 'logout' %}">Logout</a>
-        </nav>
-        <hr>
     </header>
 
     <main>
@@ -31,6 +22,9 @@
     </main>
 
     <script src="{% static 'blog/js/main.js' %}"></script>
+    <form action="{% url 'search' %}" method="GET">
+    <input type="text" name="q" placeholder="Search posts..." />
+</form>
 
 </body>
 </html>
