@@ -2,22 +2,20 @@ from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 
-User = get_user_model()
-
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = get_user_model()  
         fields = ['username', 'password', 'email']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
-        # استخدام get_user_model
-        user = User.objects.create_user(
+      
+        user = get_user_model().objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password'],
         )
-        # إنشاء Token مباشرة
+       
         Token.objects.create(user=user)
         return user
 
